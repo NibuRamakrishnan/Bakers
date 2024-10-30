@@ -1,8 +1,0 @@
-{
-  "routes": [
-    "/AddLogs",
-    "/BussinessLogs",
-    "/Dashboard",
-    "/Home"
-  ]
-}
