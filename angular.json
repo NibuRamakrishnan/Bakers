@@ -122,6 +122,9 @@
               "node_modules/bootbox/dist/bootbox.min.js"
             ]
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }
