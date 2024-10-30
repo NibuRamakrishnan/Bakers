@@ -38,11 +38,11 @@
               }
             ],
             "styles": [
-              "styles.css",
+              "src/styles.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "assets/css/bakers.css",
-              "assets/css/font.css",
-              "assets/css/font-awesome-n.min.css" 
+              "src/assets/css/bakers.css",
+              "src/assets/css/font.css",
+              "src/assets/css/font-awesome-n.min.css" 
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js", 
