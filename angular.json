@@ -34,7 +34,7 @@
               {
                 "glob": "**/*",
                 "input": "src/assets",
-                "output": "/assets"
+                "output": "/Bakers/assets"
               }
             ],
             "styles": [
