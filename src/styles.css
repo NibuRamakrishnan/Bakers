@@ -1,0 +1,9 @@
+/* You can add global styles to this file, and also import other style files */
+.modal-backdrop
+{
+    z-index: 0 !important;
+}
+.bootbox .modal-content
+{
+    width: 95% !important;
+}

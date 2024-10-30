@@ -1,0 +1,65 @@
+<div class="col-12 custom-breadcrumb bgblue inline-flex"> 
+   <h6 class="strong">Add Logs</h6>
+   </div>
+   <div class="pcoded-wrapper">
+    <div class="pcoded-content">
+       <div class="pcoded-inner-content">
+          <div class="main-body">
+             <div class="page-wrapper">
+                <div class="page-body">
+                   <div class="row">
+                      <div class="col-md-12 col-xl-4"><p class="text-c-red f-11 mb-1">Note: The date format for the below field is mm/dd/yyyy</p>                        
+                        <div class="col-12 inline-flex pad0">
+                           <div class="col-10 pad0">
+                              <input type="date" class="form-control mb-2" (change)="filterBussinessLogs($event)"/>  
+                           </div> 
+                           <div class="col-2 pad0">
+                              <a (click)="resetFilter()"><i class="fa fa-solid fa-sync icon"></i></a>
+                           </div>
+                        </div>
+                        <p>{{emptymessage}}</p>
+                         <div class="card comp-card" *ngFor="let record of BussinessLogs">
+                            <div class="card-body">
+                               <div class="row align-items-center">
+                                  <div class="col-12">
+                                    <div class="inline-flex col-12">
+                                       <div class="col-10">
+                                          <h5 class="m-b-10 strong">{{ formatDate(record['log_date']) }}</h5>
+                                       </div>
+                                       <div class="col-2">
+                                          <p class="strong {{getBalancestatusClass(record['sum_income'], record['sum_expense'])}}">{{getBalancestatus(record['sum_income'], record['sum_expense'])}}</p>
+                                       </div>
+                                    </div>  
+                                     <div class="col-12 inline-flex textcenter">
+                                        <div class="col-4">
+                                           <p class="f-11 mb-1">Income</p>
+                                           <h6 class="f-w-700 text-c-green">₹{{record['sum_income']}}</h6>
+                                        </div>
+                                        <div class="col-4">
+                                           <p class="f-11 mb-1">Expense</p>
+                                           <h6 class="f-w-700 text-c-red">₹{{record['sum_expense']}}</h6>
+                                        </div>
+                                        <div class="col-4">
+                                            <p class="f-11 mb-1">Balance</p>
+                                            <h6 class="f-w-700 {{getBalancestatusClass(record['sum_income'], record['sum_expense'])}}">₹{{getBalanceAmount(record['sum_income'], record['sum_expense'])}}</h6>
+                                         </div>
+                                     </div> 
+                                     <div>
+                                        <button class="mt-4 m-b-0 btn btn-primary" (click)="OpenLogItem(record['id'])">More Info</button>
+                                        <button class="mt-4 ml-2 m-b-0 btn btn-primary btn-danger" (click)="DeleteLogItem(record['id'])">Delete</button>
+                                     </div> 
+                                  </div>
+                                  <div class="col-auto">  
+                                 
+                                  </div>
+                               </div>
+                            </div>
+                         </div> 
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div> 

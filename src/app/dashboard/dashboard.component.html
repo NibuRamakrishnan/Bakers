@@ -1,0 +1,87 @@
+<div class="row">
+<div class="col-12 custom-breadcrumb bgblue inline-flex"> 
+   <h6 class="strong">Dashboard</h6>
+   </div>
+   </div>
+
+<div class="pcoded-wrapper">
+    <div class="pcoded-content">
+       <div class="pcoded-inner-content">
+          <div class="main-body">
+             <div class="page-wrapper">
+                <div class="page-body">
+                   <div class="row">
+                      <div class="col-md-12 col-xl-4">
+                         <div class="card comp-card" (click)="LoadAllLogs()">
+                            <div class="card-body">
+                               <div class="row align-items-center">
+                                  <div class="col-12">
+                                     <h6 class="m-b-10 strong">Bussiness Logs</h6>
+                                     <div class="col-12 inline-flex m-b-10 textcenter">
+                                       <div class="col-4">
+                                          <p class="f-12 mb-1">Income</p>
+                                          <h6 class="f-w-700 text-c-green">₹{{sum_income}}</h6>
+                                       </div>
+                                       <div class="col-4">
+                                          <p class="f-12 mb-1">Expense</p>
+                                          <h6 class="f-w-700 text-c-red">₹{{sum_expenses}}</h6>
+                                       </div>
+                                       <div class="col-4">
+                                           <p class="f-12 mb-1">Balance</p>
+                                           <h6 class="f-w-700 {{balance_amount_class}}">₹{{balance_amount}}</h6>
+                                        </div>
+                                    </div> 
+                                     <p class="m-b-0">{{date_range_format}}</p>
+                                  </div>
+                                  <div class="col-auto">  
+                                    
+                                  </div>
+                               </div>
+                            </div>
+                         </div>
+                         <div class="card comp-card" (click)="LoadNewLogs()">
+                            <div class="card-body">
+                               <div class="row align-items-center">
+                                  <div class="col">
+                                     <h6 class="m-b-10 strong">Add New Log</h6>
+                                     <div class="col-12 inline-flex textcenter">
+                                        <div class="col-6">
+                                           <p class="f-12 mb-1">Total Logs</p>
+                                           <h5 class="f-w-700 text-c-green">{{total_logs}}</h5>
+                                        </div> 
+                                     </div> 
+                                     <p class="m-b-0">{{date_range_format}}</p>
+                                  </div>
+                                  <div class="col-auto">
+                                     
+                                  </div>
+                               </div>
+                            </div>
+                         </div>
+                         <div class="card comp-card" style="display: none;">
+                            <div class="card-body">
+                               <div class="row align-items-center">
+                                  <div class="col">
+                                     <h6 class="m-b-25">Reports</h6>
+                                     <div class="col-12 inline-flex">
+                                        <div class="col-6">
+                                           <p class="f-12 mb-1">Total Reports</p>
+                                           <h3 class="f-w-700 text-c-green">4</h3>
+                                        </div> 
+                                     </div> 
+                                     <p class="m-b-0">May 23 - June 01 (2017)</p>
+                                  </div>
+                                  <div class="col-auto">
+                                     
+                                  </div>
+                               </div>
+                            </div>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>

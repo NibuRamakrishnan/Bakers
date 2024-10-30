@@ -1,0 +1,11 @@
+.form-tool  label, .accordion .accordion-header  button
+{
+    font-weight: bold !important;
+    font-size: small;
+}
+table thead tr,table tbody tr{
+    font-size: small;
+}
+table thead td{
+    word-break: break-all !important;
+} 
