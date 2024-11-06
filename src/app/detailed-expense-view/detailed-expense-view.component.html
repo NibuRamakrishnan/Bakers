@@ -1,0 +1,54 @@
+
+<div class="col-12 custom-breadcrumb bgblue inline-flex"> 
+    <h6 class="strong">Expenses</h6>
+    </div>
+     <div class="pcoded-wrapper">
+     <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+           <div class="main-body">
+              <div class="page-wrapper">
+                 <div class="page-body">
+                    <div class="row">
+                       <div class="col-md-12 col-xl-4">           
+                        <form [formGroup]="expense_group" class="form-tool">
+                            <label class="m-b-10">Group By</label>   
+                            <select class="form-select m-b-10" formControlName="group" (change)="fnGroupby()">
+                                <option value="0">--Select--</option>
+                                <option value="Material Cost">Material Cost</option>
+                                <option value="Wages">Wages</option>
+                            </select>
+                        </form> 
+                          <div class="card comp-card" *ngFor="let record of filtered_data">
+                             <div class="card-body">
+                                <div class="row align-items-center">
+                                   <div class="col-12">
+                                     <div class="inline-flex col-12">
+                                        <div class="col-10">
+                                           <h5 class="m-b-10 strong">{{ record['expense'] }}</h5>
+                                        </div> 
+                                     </div>   
+                                      <div class="col-12 inline-flex textcenter">
+                                         <div class="col-6">
+                                            <p class="f-11 mb-1">Amount</p>
+                                            <h4 class="f-w-700">₹ {{record['amount']}}</h4>
+                                         </div> 
+                                         <div class="col-6">
+                                          <p class="f-11 mb-1">Expense Type</p>
+                                          <p class="f-11 mb-1 f-w-700">{{record['expense_type']}}</p>
+                                       </div> 
+                                      </div>  
+                                      <div> 
+                                         <button class="mt-4 ml-2 m-b-0 btn btn-primary btn-danger {{display_none}}" (click)="fnDeleteItem(record['id'])">Delete</button>
+                                      </div> 
+                                   </div> 
+                                </div>
+                             </div>
+                          </div> 
+                       </div>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+  </div> 

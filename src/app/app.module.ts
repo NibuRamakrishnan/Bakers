@@ -11,6 +11,9 @@ import { AddNewLogsComponent } from './add-new-logs/add-new-logs.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoaderServiceService } from './loader-service.service';
 import { LoaderComponentComponent } from './loader-component/loader-component.component';
+import { RenovationHomeComponent } from './renovation-home/renovation-home.component';
+import { AddRenovationExpenseComponent } from './add-renovation-expense/add-renovation-expense.component';
+import { DetailedExpenseViewComponent } from './detailed-expense-view/detailed-expense-view.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,10 @@ import { LoaderComponentComponent } from './loader-component/loader-component.co
     DashboardComponent,
     BussinessLogsComponent,
     AddNewLogsComponent,
-    LoaderComponentComponent, 
+    LoaderComponentComponent,
+    RenovationHomeComponent,
+    AddRenovationExpenseComponent,
+    DetailedExpenseViewComponent, 
   ],
   imports: [ 
     BrowserModule,

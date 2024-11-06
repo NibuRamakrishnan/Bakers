@@ -1,0 +1,75 @@
+<div class="col-12 custom-breadcrumb bgblue inline-flex"> 
+    <h6 class="strong">Add Logs</h6>
+    </div>
+    <div class="pcoded-wrapper">
+      <div class="pcoded-content">
+         <div class="pcoded-inner-content">
+            <div class="main-body">
+               <div class="page-wrapper">
+                  <div class="page-body">
+                     <div class="row">
+                      <div class="col-12">
+                        <form [formGroup]="addexpense" class="form-tool" (ngSubmit)="onSubmit()">
+                          <div class="col-12">
+                            <div class="row">
+                              <div>
+                                <label>Renovation Type</label>
+                                <select  class="form-select mt-1"  formControlName="work_type" >
+                                  <option value="{{i}}" *ngFor="let i of work_types">
+                                    {{i}}
+                                  </option>
+                                </select>
+                                <div *ngIf="addexpense.get('work_type')?.invalid && addexpense.get('work_type')?.touched">
+                                  <small class="text-c-red" *ngIf="addexpense.get('work_type')?.errors?.['required']">Type is required.</small> 
+                                </div>  
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row mt-3">
+                            <div class="col-12">
+                              <div>
+                                <label>Expense Type</label>
+                                <select  class="form-select mt-1" formControlName="expense_type" >
+                                  <option selected value="Material Cost">Material Cost</option>
+                                  <option value="Wages">Wages</option>
+                                </select>
+                                <div *ngIf="addexpense.get('expense_type')?.invalid && addexpense.get('expense_type')?.touched">
+                                  <small class="text-c-red" *ngIf="addexpense.get('expense_type')?.errors?.['required']">Expense Type is required.</small> 
+                                </div>  
+                                </div> 
+                            </div>
+                          </div> 
+                          <div class="row mt-3">
+                            <div class="col-12">
+                              <div>
+                                <label>Expense Description</label>
+                                <input type="text"  class="form-control mt-1" formControlName="expense" />
+                                <div *ngIf="addexpense.get('expense')?.invalid && addexpense.get('expense')?.touched">
+                                  <small class="text-c-red" *ngIf="addexpense.get('expense')?.errors?.['required']">Expense is required.</small> 
+                                </div>  
+                                </div> 
+                            </div>
+                          </div> 
+                          <div class="row mt-3">
+                            <div class="col-12">
+                              <div>
+                                <label>Amount</label>
+                                <input type="number"  class="form-control mt-1" formControlName="amount" />
+                                <div *ngIf="addexpense.get('amount')?.invalid && addexpense.get('amount')?.touched">
+                                  <small class="text-c-red" *ngIf="addexpense.get('amount')?.errors?.['required']">Amount is required.</small> 
+                                </div>  
+                                </div> 
+                            </div>
+                          </div>  
+                          <button type="submit" class="btn btn-primary mt-3" style="width: 100%;"  [disabled]="addexpense.invalid">Submit</button>
+                          <button class="btn btn-secondary mt-3" style="width: 100%;">Cancel</button>
+                        </form>
+                      </div> 
+                      </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div> 
+    
