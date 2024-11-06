@@ -11779,3 +11779,11 @@ display: inline-flex;
   text-align: center !important;
 }
 .ml-0{margin-left:0!important}.ml-1{margin-left:.25rem!important}.ml-2{margin-left:.5rem!important}.ml-3{margin-left:1rem!important}.ml-4{margin-left:1.5rem!important}.ml-5{margin-left:3rem!important}.ml-auto{margin-left:auto!important}
+.display_block
+{
+  display: block !important;
+}
+.display_none
+{
+  display: none !important;
+}
