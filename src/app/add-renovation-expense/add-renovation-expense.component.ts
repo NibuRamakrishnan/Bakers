@@ -39,6 +39,7 @@ export class AddRenovationExpenseComponent  implements OnInit{
   }
   onSubmit() { 
     if (this.addexpense.valid) { 
+      this.loader.show();
       var work_type = this.addexpense.value["work_type"];
       var expense = this.addexpense.value["expense"];
       var amount = this.addexpense.value["amount"] ?? 0;   
@@ -64,11 +65,13 @@ export class AddRenovationExpenseComponent  implements OnInit{
     if(result.result == "value updated successfully"){
       bootbox.alert("Daily log Updated successfully", this.ReloadDashboard());
     }
+    this.loader.hide();
   }
   AfterInsert(result:any){  
     if(result.result == true){
       bootbox.alert("Daily log added successfully", this.ReloadDashboard());
     }
+    this.loader.hide();
   }
   ReloadDashboard()
   {
