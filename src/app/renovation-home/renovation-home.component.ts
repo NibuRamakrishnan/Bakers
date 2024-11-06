@@ -46,7 +46,10 @@ fnSetLocalStorage(result:any, name:string){
     this.renovation_data=result.records; 
     this.fnSetTotalArray();
   } 
-  this.loader.hide();
+  else{
+    this.loader.hide();
+  }
+  
 }
 fnSetLocalStorageWork_Type(result :any){
   if(result != null && result.records != null){
@@ -68,7 +71,8 @@ fnSetTotalArray()
       } 
       
     }
-  } 
+  }
+  this.loader.hide(); 
 }
 filterByWork_type(type : string){
   var sum = "0";
