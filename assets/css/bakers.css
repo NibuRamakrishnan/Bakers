@@ -11735,6 +11735,7 @@ table.dataTable.dtr-inline.collapsed>tbody>tr>td:first-child:before,table.dataTa
 }
 .inline-flex{
 display: inline-flex;
+flex-wrap: wrap;
 }
 .strong{
   font-weight: 600;
@@ -11786,4 +11787,13 @@ display: inline-flex;
 .display_none
 {
   display: none !important;
+}
+.descriprions
+{
+  padding: 10px;
+    background-color: #4099ff;
+    margin: 10px;
+    border-radius: 10px;
+    color: #fff;
+    text-align: center;
 }
