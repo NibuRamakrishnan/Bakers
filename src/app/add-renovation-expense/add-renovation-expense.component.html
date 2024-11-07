@@ -12,16 +12,8 @@
                         <form [formGroup]="addexpense" class="form-tool" (ngSubmit)="onSubmit()">
                           <div class="col-12">
                             <div class="row">
-                              <div>
-                                <label>Renovation Type</label>
-                                <select  class="form-select mt-1"  formControlName="work_type" >
-                                  <option value="{{i}}" *ngFor="let i of work_types">
-                                    {{i}}
-                                  </option>
-                                </select>
-                                <div *ngIf="addexpense.get('work_type')?.invalid && addexpense.get('work_type')?.touched">
-                                  <small class="text-c-red" *ngIf="addexpense.get('work_type')?.errors?.['required']">Type is required.</small> 
-                                </div>  
+                              <div> 
+                                <input type="hidden" value="{{work_type}}"  [(ngModel)]="work_type"  formControlName="work_type"/>
                               </div>
                             </div>
                           </div>
@@ -40,14 +32,17 @@
                             </div>
                           </div> 
                           <div class="row mt-3">
-                            <div class="col-12">
-                              <div>
-                                <label>Expense Description</label>
-                                <input type="text"  class="form-control mt-1" formControlName="expense" />
+                            <label>Expense Description</label>
+                            <div class="col-12 inline-flex">
+                              <div class="col-8">
+                                <input type="text"  [(ngModel)]="expense"  value="{{expense}}" class="form-control mt-1" formControlName="expense" />
                                 <div *ngIf="addexpense.get('expense')?.invalid && addexpense.get('expense')?.touched">
                                   <small class="text-c-red" *ngIf="addexpense.get('expense')?.errors?.['required']">Expense is required.</small> 
                                 </div>  
                                 </div> 
+                                <div class="col-4">
+                                  <button class="btn btn-primary ml-2" (click)="fnshowChoosePanel()">Choose</button>
+                                </div>
                             </div>
                           </div> 
                           <div class="row mt-3">
@@ -61,13 +56,33 @@
                                 </div> 
                             </div>
                           </div>  
-                          <button type="submit" class="btn btn-primary mt-3" style="width: 100%;"  [disabled]="addexpense.invalid">Submit</button>
+                          <button type="submit" class="btn btn-primary mt-3" style="width: 100%;">Submit</button>
                           <button class="btn btn-secondary mt-3" style="width: 100%;">Cancel</button>
                         </form>
                       </div> 
                       </div>
                      </div>
-                  </div>
+                     <div class="modal fade {{modalclassname}}" style="min-height: 100%;" tabindex="-1" role="dialog" aria-modal="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header border-0"><h5 class="modal-title">Expense Description</h5>
+                             
+                          </div>
+                          <div class="modal-body">
+                            <div class="col-12 inline-flex">
+                             <div class="col-3 descriprions" *ngFor="let record of descriptions" (click)="fnselectDescription(record)">
+                              <p>{{record}}</p>
+                             </div> 
+                            </div>
+                          </div>
+                          <div class="modal-footer"> 
+                            <button class="btn btn-secondary" (click)="fncloseModal()">Cancel</button>
+                          </div>
+                          </div>
+                        </div>
+                      </div> 
+                      <div class="show {{dropclass}}"></div>
+                  </div> 
                </div>
             </div>
          </div>

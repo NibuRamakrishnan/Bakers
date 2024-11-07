@@ -94,4 +94,8 @@ if(result.result == "value deleted successfully"){
   this.router.navigate(["RenovationHome"]);
 }
 }
+AddNew()
+{
+  this.router.navigate(["AddExpense", this.work_type]); 
+}
 }
