@@ -10,7 +10,7 @@ import { DetailedExpenseViewComponent } from './detailed-expense-view/detailed-e
 const routes: Routes = [
   { path: '', redirectTo: 'RenovationHome', pathMatch: 'full'},
   {path:'RenovationHome', component: RenovationHomeComponent},
-  {path:'AddExpense', component: AddRenovationExpenseComponent},
+  {path:'AddExpense/:type', component: AddRenovationExpenseComponent},
   {path:'DetailedView/:type', component:DetailedExpenseViewComponent}
   // { path: 'Home', component: HomeComponent },
   // { path: 'Dashboard', component: DashboardComponent },
