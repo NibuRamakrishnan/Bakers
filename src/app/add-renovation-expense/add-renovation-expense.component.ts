@@ -177,4 +177,8 @@ export class AddRenovationExpenseComponent  implements OnInit{
     var currentTime = d.toLocaleString();  
     return currentTime;
   }
+  fncancel()
+  {
+    this.router.navigate(["DetailedView", this.work_type]);
+  }
 }
