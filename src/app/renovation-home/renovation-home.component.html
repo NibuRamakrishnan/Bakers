@@ -22,11 +22,11 @@
                                       <div class="col-12 inline-flex textcenter">
                                          <div class="col-6">
                                             <p class="f-11 mb-1">Expense till now</p>
-                                            <h4 class="f-w-700">₹ {{filterByWork_type(record['work_type'])}}</h4>
+                                            <h4 class="f-w-700">₹ {{fnFormatRupee(filterByWork_type(record['work_type']))}}</h4>
                                          </div> 
                                          <div class="col-6">
                                           <p class="f-11 mb-1">Estimate</p>
-                                          <h4 class="f-w-700 text-c-green">₹ {{record['estimate_amount']}}</h4>
+                                          <h4 class="f-w-700 text-c-green">₹ {{fnFormatRupee(record['estimate_amount'])}}</h4>
                                        </div> 
                                       </div> 
                                       <div class="col-12">

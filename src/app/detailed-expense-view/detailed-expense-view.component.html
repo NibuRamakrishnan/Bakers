@@ -11,10 +11,13 @@
                     <div class="row">
                        <div class="col-md-12 col-xl-4">
                         <div class="col-12  inline-flex m-b-10">
-                           <div class="col-6 m-b-10">
+                           <div class="col-3 m-b-10">
                               <button class="btn btn-secondary" (click)="fnback()">Back</button>
-                           </div>       
-                           <div class="col-6 m-b-10" style="text-align: right;">
+                           </div>    
+                           <div class="col-5 m-b-10 inline-flex" style="align-items: end;text-align: center;">  
+                              <h3 style="width: 100% !important;" class="text-c-red">₹{{total_amount}}</h3>
+                           </div>   
+                           <div class="col-4 m-b-10" style="text-align: right;">
                               <button class="btn btn-primary" (click)="AddNew()">Add New</button>
                            </div>    
                         </div> 
@@ -46,7 +49,7 @@
                                       <div class="col-12 inline-flex textcenter">
                                          <div class="col-6">
                                             <p class="f-11 mb-1">Amount</p>
-                                            <h4 class="f-w-700">₹ {{record['amount']}}</h4>
+                                            <h4 class="f-w-700">₹ {{fnFormatRupee(record['amount'])}}</h4>
                                          </div> 
                                          <div class="col-6">
                                           <p class="f-11 mb-1">Expense Type</p>

@@ -99,4 +99,7 @@ navigateAdd()
 {
   this.router.navigate(["AddExpense"]);
 }
+fnFormatRupee(amount:string){
+  return this.storage.formatAmount(parseInt(amount));
+  }
 }

@@ -34,6 +34,7 @@ work_types:string[]=[];
 filtered_data:RenovationData[] = [];
 const_filtered_data:RenovationData[] = []; 
 display_none = "display_block";
+total_amount ="";
 ngOnInit(): void {
   this.work_type = this.route.snapshot.paramMap.get('type') ?? ""; 
   var work_types_list = this.storage.getLocalItem("work_types"); 
@@ -43,6 +44,7 @@ ngOnInit(): void {
         this.work_types.push(work_types_list_json[i]["work_type"].toString());
       } 
   }
+  this.fnTotalCalculation();
   this.LoadDetailedExpense(this.work_type); 
 }
 LoadDetailedExpense(type:string){
@@ -121,6 +123,22 @@ fnback()
 fntypeSelect()
 {
   this.work_type =  this.expense_group.value["type"];
+  this.fnTotalCalculation();
   this.LoadDetailedExpense(this.work_type);
+}
+fnTotalCalculation()
+{
+  if(this.work_type != null && this.work_type.length>0){
+    var renovation_data = this.storage.getLocalItem("renovation_data");
+    if(renovation_data != null && renovation_data.length > 0){
+      const sum = renovation_data
+      .filter((s: RenovationData) => s.work_type == this.work_type)
+      .reduce((accumulator:string, current:RenovationData) => accumulator + parseInt(current.amount), 0);
+      this.total_amount = this.storage.formatAmount(parseInt(sum));
+    } 
 } 
+}
+fnFormatRupee(amount:string){
+return this.storage.formatAmount(parseInt(amount));
+}
 }
