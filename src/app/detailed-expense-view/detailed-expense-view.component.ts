@@ -23,7 +23,7 @@ declare var bootbox: any;
 
 export class DetailedExpenseViewComponent implements OnInit {
 expense_group: FormGroup;
-constructor(private router:Router, private route:ActivatedRoute,private storage : StorageService,private fbb: FormBuilder, private service:GooglesheetapiService){
+constructor(private router:Router, private route:ActivatedRoute,private storage : StorageService,private fbb: FormBuilder, private service:GooglesheetapiService, private loader:LoaderServiceService){
   this.expense_group = this.fbb.group({
     group: ['']
   });
@@ -39,7 +39,7 @@ ngOnInit(): void {
   }
 }
 LoadDetailedExpense(type:string){
-var json_expense = this.storage.getLocalItem("renovation_data"); 
+var json_expense = this.storage.getLocalItem("renovation_data");  
 if(json_expense != null){ 
   if(json_expense != null && json_expense.length > 0){
     var type_data = json_expense.filter((s:RenovationData)=>s.work_type == type);
@@ -57,7 +57,7 @@ fnGroupby()
     if(group != "0"){
       this.display_none = "display_none";
       var total_sum =  this.storage.getLocalItem("renovation_data")
-      .filter((s: RenovationData) => s.expense_type === group)
+      .filter((s: RenovationData) => s.expense_type == group)
       .reduce((accumulator:string, current:RenovationData) => accumulator + parseInt(current.amount), 0);
       const jsonData: RenovationData = {
         id:"",
@@ -80,18 +80,24 @@ fnGroupby()
 }
 fnDeleteItem(id:string){ 
   if(id !=null){
-    console.log("test");
     bootbox.confirm("Do you want to delete the entry?",(user_ok:boolean)=>{
       if(user_ok){
         this.service.doSubmitAPI("id=" + id + "&action=delete&table=Overall_status")
-            .subscribe((result) => this.fnConfirmDelete(result));
+            .subscribe((result) => this.fnConfirmDelete(result, id));
       }
     })
   }
 }
-fnConfirmDelete(result:any){ 
+fnConfirmDelete(result:any, id:string){ 
 if(result.result == "value deleted successfully"){
-  this.router.navigate(["RenovationHome"]);
+  const idToRemove = id;
+  var existing_values = this.storage.getLocalItem("renovation_data");
+  if(existing_values != null && existing_values.length > 0){
+    existing_values = existing_values.filter((item:RenovationData) => item.id !== idToRemove); 
+  } 
+  this.storage.clearLocalStorage();
+  this.storage.setLocalItem("renovation_data", existing_values); 
+  window.location.reload(); 
 }
 }
 AddNew()

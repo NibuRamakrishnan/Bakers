@@ -5,6 +5,7 @@ import { GooglesheetapiService } from '../googlesheetapi.service';
 import { LoaderServiceService } from '../loader-service.service';
 import { ActivatedRoute } from '@angular/router';
 import { StorageService } from '../storage.service';  
+import { getRandomValues } from 'node:crypto';
 
 declare var bootbox: any;  
 interface RenovationData {
@@ -60,9 +61,10 @@ export class AddRenovationExpenseComponent  implements OnInit{
       var amount = this.addexpense.value["amount"] ?? 0;   
       var table = "Overall_status";
       var action = "insert";
-      var id = "0"; 
+      var id = this.generateRandomId(); 
       var expense_type = this.addexpense.value["expense_type"];
       var renovation_detail = this.storage.getLocalItem("renovation_data");
+      var timestamp=this.generateCurrentTimestamp();
       if(renovation_detail !=null){
         var matched_data = renovation_detail.filter((s:RenovationData)=>s.expense == expense && s.expense_type == expense_type);
         if(matched_data != null && matched_data.length > 0){
@@ -70,31 +72,65 @@ export class AddRenovationExpenseComponent  implements OnInit{
           id=matched_data[0].id;
           amount = parseInt(amount) + parseInt(matched_data[0].amount);
         }
+        var inserted_values={
+          id:id,
+          work_type:work_type,
+          expense:expense,
+          amount:amount,
+          timestamp:timestamp,
+          is_deleted:"0",
+          expense_type:expense_type
+        };
       }
       // if(this.id != "" && this.id.length > 0){
       //   action="update";
       //   id = this.id;
       // } 
-      var parameters="id="+id+"&work_type="+work_type+"&expense="+expense+"&amount="+amount+"&expense_type="+expense_type+"&action="+action+"&table="+table+"";      
+      var parameters="id="+id+"&work_type="+work_type+"&expense="+expense+"&amount="+amount+"&expense_type="+expense_type+"&timestamp="+timestamp+"&action="+action+"&table="+table+"";      
       if(action == "update"){
-        this.service.doSubmitAPI(parameters).subscribe((result)=>this.AfterUpdate(result));  
+        this.service.doSubmitAPI(parameters).subscribe((result)=>this.AfterUpdate(result, inserted_values));  
       }
       else{
-        this.service.doSubmitAPI(parameters).subscribe((result)=>this.AfterInsert(result));
+        this.service.doSubmitAPI(parameters).subscribe((result)=>this.AfterInsert(result, inserted_values));
       }
     }
   }
-  AfterUpdate(result:any){  
+  AfterUpdate(result:any, insertedElement:any){  
     if(result.result == "value updated successfully"){
-      bootbox.alert("Daily log Updated successfully", this.ReloadDashboard());
+      bootbox.alert("Daily log Updated successfully", this.LoadDataToLocalStorageUpdate(insertedElement)); 
     }
     this.loader.hide();
   }
-  AfterInsert(result:any){  
+  AfterInsert(result:any, insertedElement:any){  
     if(result.result == true){
-      bootbox.alert("Daily log added successfully", this.ReloadDashboard());
+      bootbox.alert("Daily log added successfully", this.LoadDataToLocalStorage(insertedElement)); 
     }
     this.loader.hide();
+  }
+  LoadDataToLocalStorageUpdate(insertedElement:any)
+  {
+    if(insertedElement != null){
+      const idToRemove = insertedElement.id;
+      var existing_values = this.storage.getLocalItem("renovation_data");
+      if(existing_values != null && existing_values.length > 0){
+        existing_values = existing_values.filter((item:RenovationData) => item.id !== idToRemove); 
+      }
+      existing_values.push(insertedElement);
+      this.storage.clearLocalStorage();
+      this.storage.setLocalItem("renovation_data", existing_values.reverse());
+      this.router.navigate(["DetailedView", this.work_type]);
+    }
+  }
+
+  LoadDataToLocalStorage(insertedElement:any)
+  {
+    if(insertedElement != null){
+      var existing_values = this.storage.getLocalItem("renovation_data");
+      existing_values.push(insertedElement);
+      this.storage.clearLocalStorage();
+      this.storage.setLocalItem("renovation_data", existing_values.reverse());
+      this.router.navigate(["DetailedView", this.work_type]); 
+    }
   }
   ReloadDashboard()
   {
@@ -126,5 +162,19 @@ export class AddRenovationExpenseComponent  implements OnInit{
     this.expense = key;
     this.modalclassname="";
     this.dropclass="";
+  }
+  generateRandomId(length: number = 8): string {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return result;
+  }
+  generateCurrentTimestamp()
+  {
+    var d = new Date();
+    var currentTime = d.toLocaleString();  
+    return currentTime;
   }
 }
