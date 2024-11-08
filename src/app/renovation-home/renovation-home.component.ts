@@ -2,7 +2,6 @@ import { Component,  OnInit } from '@angular/core';
 import { StorageService } from '../storage.service';
 import { GooglesheetapiService } from '../googlesheetapi.service';
 import { Router } from '@angular/router';
-import { LoaderServiceService } from '../loader-service.service';
 interface WorkType {
   id:string,
   work_type:string,
@@ -29,33 +28,31 @@ interface RenovationData {
   styleUrl: './renovation-home.component.css'
 })
 export class RenovationHomeComponent implements OnInit{
-constructor(private storage: StorageService, private api:GooglesheetapiService, private router:Router,private loader:LoaderServiceService){}
+constructor(private storage: StorageService, private api:GooglesheetapiService, private router:Router){}
 work_types = [];
 renovation_data = [];
 Total_Data : Totals[]=[];
 expclass = "";
 stausMessage = "";
 ngOnInit(): void {
-  this.loader.show();
   this.storage.clearLocalStorage();
-  this.api.doSubmitAPI("action=read&table=Work_Type").subscribe((result)=>this.fnSetLocalStorageWork_Type(result));
+  this.api.doSubmitAPI("action=read&table=Overall_status").subscribe((result)=> this.fnSetLocalStorage(result, "renovation_data"));
+  
 }
 fnSetLocalStorage(result:any, name:string){ 
   if(result != null && result.records != null){ 
-    this.storage.setLocalItem(name, result.records.filter((s: RenovationData) => s.is_deleted == "0"));
-    this.renovation_data=result.records; 
-    this.fnSetTotalArray();
+    this.storage.setLocalItem(name, result.records.filter((s: RenovationData) => s.is_deleted == "0").reverse());
+    if(name == "renovation_data"){
+      this.renovation_data=result.records;
+    }   
+    this.api.doSubmitAPI("action=read&table=Work_Type").subscribe((result)=>this.fnSetLocalStorageWork_Type(result));
   } 
-  else{
-    this.loader.hide();
-  }
-  
 }
 fnSetLocalStorageWork_Type(result :any){
-  if(result != null && result.records != null){
+  if(result != null && result.records != null){ 
     this.storage.setLocalItem("work_types", result.records.filter((s: WorkType) => s.is_deleted == "0"));
     this.work_types=result.records; 
-    this.api.doSubmitAPI("action=read&table=Overall_status").subscribe((result)=> this.fnSetLocalStorage(result, "renovation_data"));
+    this.fnSetTotalArray();
   }
 }
 fnSetTotalArray()
@@ -71,8 +68,7 @@ fnSetTotalArray()
       } 
       
     }
-  }
-  this.loader.hide(); 
+  } 
 }
 filterByWork_type(type : string){
   var sum = "0";
