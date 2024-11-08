@@ -41,10 +41,13 @@ export class StorageService {
   // Clear all items from localStorage
   clearLocalStorage(): void {
     localStorage.clear();
-  }
+  } 
 
   // Clear all items from sessionStorage
   clearSessionStorage(): void {
     sessionStorage.clear();
   }
+  formatAmount(amount: number): string {
+    return amount.toLocaleString('en-US');
+  } 
 }
