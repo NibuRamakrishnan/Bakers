@@ -18,7 +18,7 @@ export class GooglesheetapiService {
   //googlesheet_url="https://script.google.com/macros/s/AKfycbwWg8yLFLqzco1Wb7x6EM7Q4n9MhB_RZtwDt5TYxcJJFzz2UDN7DucYCVTPfH73prcL/exec?"
   
   /*Production*/
-  googlesheet_url = "https://script.google.com/macros/s/AKfycbyLRex3Mh7kcgRhmeFOonjm7Mj8zHCWUsvvZGlEy1_5_w-XF-v37AuTtq86WAh6O32xwA/exec?";
+  googlesheet_url = "https://script.google.com/macros/s/AKfycbyxcbBhwySohuPkE3T_bRPQzHl6cEB6E8OfnZvWguvi_IYMxad4zVv6qAIUHRZLqMV0fA/exec?";
   doSubmitAPI(action_url : string):Observable<any>{   
     var data : Observable<any>| null = null;
     data = this.httpclient.get(this.googlesheet_url + action_url).pipe(  
