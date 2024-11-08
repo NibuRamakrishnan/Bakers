@@ -109,6 +109,7 @@ if(result.result == "value deleted successfully"){
   this.storage.clearLocalStorage();
   this.storage.setLocalItem("renovation_data", existing_values); 
   this.LoadDetailedExpense(this.work_type); 
+  this.fnTotalCalculation();
   this.loader.hide();
 }
 }
