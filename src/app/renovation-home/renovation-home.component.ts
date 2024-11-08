@@ -45,8 +45,8 @@ fnSetLocalStorage(result:any, name:string){
     if(name == "renovation_data"){
       this.renovation_data=result.records;
     }   
-    this.api.doSubmitAPI("action=read&table=Work_Type").subscribe((result)=>this.fnSetLocalStorageWork_Type(result));
   } 
+  this.api.doSubmitAPI("action=read&table=Work_Type").subscribe((result)=>this.fnSetLocalStorageWork_Type(result));
 }
 fnSetLocalStorageWork_Type(result :any){
   if(result != null && result.records != null){ 
