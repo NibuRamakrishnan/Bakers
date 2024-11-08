@@ -90,6 +90,7 @@ fnDeleteItem(id:string){
   if(id !=null){
     bootbox.confirm("Do you want to delete the entry?",(user_ok:boolean)=>{
       if(user_ok){
+        this.loader.show();
         this.service.doSubmitAPI("id=" + id + "&action=delete&table=Overall_status")
             .subscribe((result) => this.fnConfirmDelete(result, id));
       }
@@ -97,7 +98,7 @@ fnDeleteItem(id:string){
   }
 }
 fnConfirmDelete(result:any, id:string){ 
-if(result.result == "value deleted successfully"){
+if(result.result == "value deleted successfully"){ 
   const idToRemove = id;
   var existing_values = this.storage.getLocalItem("renovation_data");
   if(existing_values != null && existing_values.length > 0){
@@ -105,7 +106,8 @@ if(result.result == "value deleted successfully"){
   } 
   this.storage.clearLocalStorage();
   this.storage.setLocalItem("renovation_data", existing_values); 
-  window.location.reload(); 
+  this.LoadDetailedExpense(this.work_type); 
+  this.loader.hide();
 }
 }
 AddNew()
