@@ -9,19 +9,30 @@
               <div class="page-wrapper">
                  <div class="page-body">
                     <div class="row">
-                       <div class="col-md-12 col-xl-4">           
+                       <div class="col-md-12 col-xl-4">
+                        <div class="col-12  inline-flex m-b-10">
+                           <div class="col-6 m-b-10">
+                              <button class="btn btn-secondary" (click)="fnback()">Back</button>
+                           </div>       
+                           <div class="col-6 m-b-10" style="text-align: right;">
+                              <button class="btn btn-primary" (click)="AddNew()">Add New</button>
+                           </div>    
+                        </div> 
                         <form [formGroup]="expense_group" class="form-tool">
+                           <div class="col-12">
+                              <label class="m-b-10">Type</label>   
+                              <select class="form-select m-b-10" formControlName="type" (change)="fntypeSelect()">
+                                 <option [selected]="work_type == type" *ngFor="let type of work_types">{{type}}</option>
+                              </select>
+                           </div> 
                            <div class="col-12">
                               <label class="m-b-10">Group By</label>   
                               <select class="form-select m-b-10" formControlName="group" (change)="fnGroupby()">
-                                  <option value="0">--Select--</option>
-                                  <option value="Material Cost">Material Cost</option>
-                                  <option value="Wages">Wages</option>
+                                  <option>--Select--</option>
+                                  <option>Material Cost</option>
+                                  <option>Wages</option>
                               </select>
-                           </div>
-                           <div class="col-12 m-b-10">
-                              <button class="btn btn-primary" (click)="AddNew()">Add New</button>
-                           </div>
+                           </div> 
                         </form> 
                           <div class="card comp-card" *ngFor="let record of filtered_data">
                              <div class="card-body">

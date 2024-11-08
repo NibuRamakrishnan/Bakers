@@ -115,8 +115,8 @@ export class AddRenovationExpenseComponent  implements OnInit{
       if(existing_values != null && existing_values.length > 0){
         existing_values = existing_values.filter((item:RenovationData) => item.id !== idToRemove); 
       }
-      existing_values.push(insertedElement);
-      this.storage.clearLocalStorage();
+      existing_values.push(insertedElement); 
+      this.storage.removeLocalItem("renovation_data");
       this.storage.setLocalItem("renovation_data", existing_values.reverse());
       this.router.navigate(["DetailedView", this.work_type]);
     }
@@ -127,7 +127,7 @@ export class AddRenovationExpenseComponent  implements OnInit{
     if(insertedElement != null){
       var existing_values = this.storage.getLocalItem("renovation_data");
       existing_values.push(insertedElement);
-      this.storage.clearLocalStorage();
+      this.storage.removeLocalItem("renovation_data"); 
       this.storage.setLocalItem("renovation_data", existing_values.reverse());
       this.router.navigate(["DetailedView", this.work_type]); 
     }

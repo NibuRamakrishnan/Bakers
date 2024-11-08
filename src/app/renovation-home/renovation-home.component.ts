@@ -41,7 +41,7 @@ ngOnInit(): void {
 }
 fnSetLocalStorage(result:any, name:string){ 
   if(result != null && result.records != null){ 
-    this.storage.setLocalItem(name, result.records.filter((s: RenovationData) => s.is_deleted == "0").reverse());
+    this.storage.setLocalItem(name, result.records.filter((s: RenovationData) => s.is_deleted == "0" || s.is_deleted == "").reverse());
     if(name == "renovation_data"){
       this.renovation_data=result.records;
     }   
@@ -50,7 +50,7 @@ fnSetLocalStorage(result:any, name:string){
 }
 fnSetLocalStorageWork_Type(result :any){
   if(result != null && result.records != null){ 
-    this.storage.setLocalItem("work_types", result.records.filter((s: WorkType) => s.is_deleted == "0"));
+    this.storage.setLocalItem("work_types", result.records.filter((s: WorkType) => s.is_deleted == "0" || s.is_deleted == ""));
     this.work_types=result.records; 
     this.fnSetTotalArray();
   }
