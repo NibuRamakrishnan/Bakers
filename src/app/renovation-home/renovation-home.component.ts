@@ -76,10 +76,13 @@ filterByWork_type(type : string){
     sum =  this.Total_Data.filter(s=>s.work_type == type)[0].total;
     var estimate_amount_record =  this.work_types.filter((s:WorkType)=>s.work_type == type); 
     if(estimate_amount_record != null){ 
-      if(parseInt(sum) > parseInt(estimate_amount_record[0]["estimate_amount"]))
+      if(parseInt(sum) > 0 && parseInt(sum) > parseInt(estimate_amount_record[0]["estimate_amount"]))
       {
         this.expclass = "text-c-red";
         this.stausMessage ="Exceeds estimate"
+      }
+      else if(parseInt(sum) == 0){ 
+        this.stausMessage ="Not yet started"
       }
       else{
         this.expclass = "text-c-green";
